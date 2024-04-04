@@ -1,9 +1,9 @@
 {
-    "name": "broshchak/tron-api",
+    "name": "ii2main/tron-api",
     "description": "A PHP API for interacting with Tron (Trx)",
     "license": "MIT",
     "type":   "library",
-    "homepage": "https://github.com/broshchak/tron-api",
+    "homepage": "https://github.com/ii2main/tron-api",
     "authors": [
         {
             "name": "Shamsudin Serderov",
