@@ -10,7 +10,7 @@ A PHP API for interacting with the Tron Protocol
 ## Install
 
 ```bash
-> composer require broshchak/tron-api --ignore-platform-reqs
+> composer require ii2main/tron-api --ignore-platform-reqs
 ```
 ## Requirements
 
