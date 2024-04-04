@@ -11,17 +11,12 @@ A PHP API for interacting with the Tron Protocol
 
 ```bash
 > composer require broshchak/tron-api --ignore-platform-reqs
-
-
-PS Install original library
-```bash
-> composer require iexbase/tron-api --ignore-platform-reqs
 ```
 ## Requirements
 
 The following versions of PHP are supported by this version.
 
-* PHP 7.4
+* PHP 7.4 - 8.1
 
 ## Example Usage
 
