@@ -285,6 +285,40 @@
     }
 
     /**
+     * Freezes an amount of TRX V2.
+     * Will give bandwidth OR Energy and TRON Power(voting rights) to the owner of the frozen tokens.
+     *
+     * @param float $amount
+     * @param string $resource
+     * @param string|null $address
+     * @param int|null $permission_id
+     * @param bool $visible
+     * @return array
+     * @throws TronException
+     */
+    public function freezeBalanceV2(float $amount = 0, string $resource = 'BANDWIDTH', string $address = null, int $permission_id = null, bool $visible = true)
+    {
+      if (empty($address))
+        throw new TronException('Address not specified');
+
+      if (!in_array($resource, ['BANDWIDTH', 'ENERGY'])) {
+        throw new TronException('Invalid resource provided: Expected "BANDWIDTH" or "ENERGY"');
+      }
+
+      if (!is_float($amount)) {
+        throw new TronException('Invalid amount provided');
+      }
+
+      return $this->tron->getManager()->request('wallet/freezebalancev2', [
+        'owner_address' => $this->tron->address2HexString($address),
+        'frozen_balance' => $this->tron->toTron($amount),
+        'resource' => $resource,
+        'visible' => $visible,
+        'Permission_id' => $permission_id,
+      ]);
+    }
+
+    /**
      * Unfreeze TRX that has passed the minimum freeze duration.
      * Unfreezing will remove bandwidth and TRON Power.
      *
@@ -306,6 +340,34 @@
       return $this->tron->getManager()->request('wallet/unfreezebalance', [
         'owner_address' => $this->tron->address2HexString($owner_address),
         'resource' => $resource
+      ]);
+    }
+
+    /**
+     * Unfreeze TRX that has passed the minimum freeze duration.
+     * Unfreezing will remove bandwidth and TRON Power.
+     *
+     * @param string $resource
+     * @param string $owner_address
+     * @return array
+     * @throws TronException
+     */
+    public function unfreezeBalanceV2(string $resource = 'BANDWIDTH', string $owner_address = null, int $unfreeze_balance = null,  int $permission_id = null, bool $visible = true)
+    {
+      if (is_null($owner_address)) {
+        throw new TronException('Owner Address not specified');
+      }
+
+      if (!in_array($resource, ['BANDWIDTH', 'ENERGY'])) {
+        throw new TronException('Invalid resource provided: Expected "BANDWIDTH" or "ENERGY"');
+      }
+
+      return $this->tron->getManager()->request('wallet/unfreezebalancev2', [
+        'owner_address' => $this->tron->address2HexString($owner_address),
+        'resource' => $resource,
+        'unfreeze_balance' => $this->tron->toTron($unfreeze_balance),
+        'visible' => $visible,
+        'Permission_id' => $permission_id
       ]);
     }
 
