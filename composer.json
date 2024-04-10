@@ -1,6 +1,6 @@
 {
     "name": "ii2main/tron-api",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A PHP API for interacting with Tron (Trx)",
     "license": "MIT",
     "type":   "library",
